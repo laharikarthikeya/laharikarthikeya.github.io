@@ -741,7 +741,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
 <script>
 /* In-page RSVP flow. Answers are collected here, then handed to the Tally form as a prefilled link. */
 (function () {
-  var CFG = {"kind": "events", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "events", "type": "multi", "q": "Which celebrations will you join?", "hint": "Choose all that apply.", "options": [{"v": "Mehendi", "t": "Mehendi", "s": "Fri 20 Nov \u00b7 2:00 PM"}, {"v": "Engagement & Sangeet", "t": "Engagement & Sangeet", "s": "Fri 20 Nov \u00b7 7:00 PM"}, {"v": "Haldi", "t": "Haldi", "s": "Sat 21 Nov \u00b7 12:00 PM"}], "none": "Sadly, I can\u2019t make it"}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}], "mode": "endpoint"};
+  var CFG = {"kind": "events", "sorry": "Thank you for letting us know, {name}. We will miss you at the celebrations, and we are grateful for your love and blessings from wherever you are.", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "events", "type": "multi", "q": "Which celebrations will you join?", "hint": "Choose all that apply.", "options": [{"v": "Mehendi", "t": "Mehendi", "s": "Fri 20 Nov \u00b7 2:00 PM"}, {"v": "Engagement & Sangeet", "t": "Engagement & Sangeet", "s": "Fri 20 Nov \u00b7 7:00 PM"}, {"v": "Haldi", "t": "Haldi", "s": "Sat 21 Nov \u00b7 12:00 PM"}], "none": "Sadly, I can\u2019t make it"}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}], "mode": "endpoint"};
   var ENDPOINT_MODE = CFG.mode === "endpoint";   // true: answers are posted to the sheet. false: hand off to the Tally form
   var root = document.getElementById("rf");
   if (!root) return;
@@ -749,9 +749,9 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   var backBtn = document.getElementById("rf-back"), closeBtn = document.getElementById("rf-x");
   var NS = "http://www.w3.org/2000/svg";
   var coarse = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-  var a, idx, finished, opener, cur;
+  var a, idx, finished, stopped, opener, cur;
 
-  function fresh() { a = { name: "", side: "", events: [], attending: "", guests: 1, declined: false }; idx = 0; finished = false; }
+  function fresh() { a = { name: "", side: "", events: [], attending: "", guests: 1, declined: false }; idx = 0; finished = false; stopped = false; }
   fresh();
 
   function el(tag, cls, text) {
@@ -856,7 +856,19 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     cur = { s: s, opts: [], nextBtn: null, numEl: null };
     stage.textContent = "";
 
-    if (finished) {
+    if (stopped) {
+      /* A guest who can't come ends the flow here. Nothing is sent to the sheet. */
+      box.className += " rf-center";
+      box.appendChild(lotus());
+      var first0 = a.name.trim().split(/\s+/)[0];
+      focusEl = heading(box, "We\u2019re sorry you can\u2019t make it", CFG.sorry.replace("{name}", first0));
+      var okc = el("button", "btn solid rf-next", "Close"); okc.type = "button"; okc.addEventListener("click", close);
+      box.appendChild(okc);
+      var undo = el("button", "rf-link", "Changed your mind? Go back"); undo.type = "button";
+      undo.addEventListener("click", function () { stopped = false; a.declined = false; a.events = []; a.attending = ""; render(); });
+      box.appendChild(undo);
+      cur = null;
+    } else if (finished) {
       box.className += " rf-center";
       box.appendChild(lotus());
       if (ENDPOINT_MODE) {
@@ -933,6 +945,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
               }
             } else { a[s.id] = o.v; if (s.setsDeclined) a.declined = !!o.declines; }
             refresh();
+            if (o.declines && a.declined) setTimeout(function () { if (a.declined && !stopped && !finished) { stopped = true; render(); } }, 300);
           });
           list.appendChild(b);
           cur.opts.push({ btn: b, o: o });
@@ -957,8 +970,8 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
 
     stage.appendChild(box);
     var total = flow().length;
-    fill.style.width = (finished ? 100 : ((idx + 1) / total) * 100) + "%";
-    backBtn.style.visibility = (finished || idx === 0) ? "hidden" : "visible";
+    fill.style.width = (finished || stopped ? 100 : ((idx + 1) / total) * 100) + "%";
+    backBtn.style.visibility = (finished || stopped || idx === 0) ? "hidden" : "visible";
     refresh();
     root.scrollTop = 0;
     if (focusEl) { try { focusEl.focus({ preventScroll: true }); } catch (e) { focusEl.focus(); } }
@@ -973,7 +986,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   function close() {
     root.hidden = true;
     document.documentElement.classList.remove("rf-lock");
-    if (finished) fresh();
+    if (finished || stopped) fresh();
     if (opener && opener.focus) { try { opener.focus({ preventScroll: true }); } catch (e) {} }
   }
   backBtn.addEventListener("click", prev);
