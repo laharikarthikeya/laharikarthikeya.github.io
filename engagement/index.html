@@ -693,14 +693,16 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     });
   });
 
-  /* Floating RSVP pill: appears after the first screen, hides near the RSVP section */
-  var fab = document.getElementById("fab"), rsvpEl = document.getElementById("rsvp"), rsvpSeen = false;
+  /* Floating RSVP pill: appears once the opening animation has played (or on the first scroll),
+     and hides while the real RSVP button is on screen. These pages are short, so it must not wait for a long scroll. */
+  var fab = document.getElementById("fab"), rsvpEl = document.getElementById("rsvp-btn") || document.getElementById("rsvp"), rsvpSeen = false, fabReady = false;
   function fabUpdate() {
     var nearEnd = window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 24;
-    fab.classList.toggle("on", window.scrollY > 380 && !rsvpSeen && !nearEnd);
+    fab.classList.toggle("on", (fabReady || window.scrollY > 40) && !rsvpSeen && !nearEnd);
   }
+  setTimeout(function () { fabReady = true; fabUpdate(); }, 1600);
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (en) { rsvpSeen = en[0].isIntersecting; fabUpdate(); }).observe(rsvpEl);
+    new IntersectionObserver(function (en) { rsvpSeen = en[0].isIntersecting; fabUpdate(); }, { rootMargin: "0px 0px -80px 0px" }).observe(rsvpEl);
   }
   var fabBusy = false;
   window.addEventListener("scroll", function () {
