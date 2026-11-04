@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <script src="../config.js"></script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Laharika weds Karthikeya Sai Events</title>
+<title>Laharika weds Karthikeya Sai Haldi</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap">
 <style>
@@ -251,49 +251,61 @@ h1, h2, p { margin: 0; }
   .events { margin-top: 44px; gap: 36px; }
 }
 
-/* Events page: compact quotes and a day-by-day timeline */
-@media (max-width: 859px) {
-  .interlude { gap: 6px; }
-  .interlude p { font-size: 19px; line-height: 1.25; }
-  .interlude .caps { font-size: 11px; }
-  .interlude .flora { width: 150px; }
-}
-.cards { display: block; position: relative; width: 100%; max-width: 560px; margin-inline: auto; }
-.cards::before { content: ""; position: absolute; left: 25px; top: 18px; bottom: 28px; width: 1px; background: var(--gold-line); }
-.tday { position: relative; display: flex; align-items: baseline; gap: 12px; padding-left: 62px; margin-top: 10px; }
-.tday:first-child { margin-top: 0; }
-.tdot { position: absolute; left: 20px; top: 50%; width: 11px; height: 11px; margin-top: -5px; transform: rotate(45deg); background: var(--gold); box-shadow: 0 0 0 4px var(--bg); }
-.tday .num { font-size: 46px; line-height: 1; }
-.tday .mon { margin: 0; font-size: 12px; letter-spacing: .22em; }
-@media (max-width: 360px) { .tday { gap: 8px; } .tday .num { font-size: 40px; } .tday .mon { white-space: nowrap; font-size: 10.5px; letter-spacing: .12em; } }
-.tev { position: relative; display: block; padding: 14px 0 12px 62px; }
-.tev .medal { position: absolute; left: 0; top: 16px; width: 52px; height: 52px; box-shadow: 0 0 0 1px var(--gold-line), 0 0 0 5px var(--bg), 0 0 0 6px var(--gold-line); }
-.tev .body { min-width: 0; }
-.tev .time { margin: 0; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 500; font-variant-numeric: tabular-nums; }
-.tev h2 { margin-top: 2px; font-size: clamp(26px, 7.2vw, 30px); line-height: 1.1; }
-.tev .tag { margin: 4px 0 0; font-size: 15px; line-height: 1.3; }
-.tev .story { margin-top: 8px; font-size: 14.5px; line-height: 1.55; max-width: 46ch; }
-.tev .vloc { max-width: 520px; margin-top: 12px; padding: 10px 12px; display: flex; flex-direction: row; align-items: flex-start; gap: 10px; background: rgba(210,188,140,.13); }
-.tev .pin { flex: none; width: 17px; height: 17px; margin-top: 2px; color: var(--gold); }
-.tev .vname { margin: 0; font-family: var(--font-display); font-size: 17px; line-height: 1.2; color: var(--gold); }
-.tev .vaddr { margin: 2px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
-.tev .vdir { display: inline-block; margin-top: 4px; padding: 6px 0 4px; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--gold-line); }
+/* Wedding card */
+.wedding .wm2 { position: absolute; z-index: -1; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); max-width: none; object-fit: cover; object-position: 50% 45%; opacity: .13; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 42%, transparent 100%); mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 42%, transparent 100%); }
+.wedding { position: relative; isolation: isolate; width: 100%; max-width: 620px; margin: 4px auto 2px; padding: 26px 20px 26px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--gold-line); background: linear-gradient(180deg, rgba(210,188,140,.17), rgba(210,188,140,.05)); }
+.wedding::before { content: ""; position: absolute; inset: 7px; border: 1px solid var(--gold-line); opacity: .65; pointer-events: none; }
+.wedding .cf { position: absolute; width: 56px; height: 56px; pointer-events: none; }
+.wedding .cf.tl { top: -10px; left: -10px; } .wedding .cf.tr { top: -10px; right: -10px; transform: scaleX(-1); }
+.wedding .cf.bl { bottom: -10px; left: -10px; transform: scaleY(-1); } .wedding .cf.br { bottom: -10px; right: -10px; transform: scale(-1, -1); }
+.wedding .wh { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.wedding .flag { width: 52px; }
+.wedding h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 9vw, 40px); line-height: 1.05; color: var(--gold); }
+.wedding .wrow { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; width: 100%; }
+.wedding .wd { display: flex; align-items: center; gap: 9px; }
+.wedding .num { font-size: 60px; line-height: .9; }
+.wedding .wdm { display: flex; flex-direction: column; gap: 4px; text-align: left; font-size: 10.5px; line-height: 1.3; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.wedding .wdm b { color: var(--ink); font-weight: 500; }
+.wedding .wv { align-self: stretch; width: 1px; background: var(--gold-line); }
+.wedding .wi { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.wedding .wi span { font-size: 10.5px; letter-spacing: .2em; line-height: 1.4; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.wedding .wi b { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.05; color: var(--gold); white-space: nowrap; }
+.wedding .vn { position: relative; margin-top: 18px; padding-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; max-width: 30ch; }
+.wedding .vn::before { content: ""; position: absolute; top: 0; left: 50%; width: 44px; height: 1px; margin-left: -22px; background: var(--gold-line); }
+.wedding .vl { font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.wedding .vn h3, .wedding .vn p { margin: 0; }
+.wedding .vn h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.15; color: var(--gold); text-wrap: balance; }
+.wedding .vn p { font-size: 14.5px; line-height: 1.5; color: var(--ink); }
+.wedding .dir { margin-top: 2px; padding: 8px 2px; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--gold-line); }
+.wedding .story { margin-top: 14px; max-width: 34ch; font-size: 15px; line-height: 1.6; text-wrap: balance; }
+@media (max-width: 360px) { .wedding .wh { gap: 10px; } .wedding .flag { width: 42px; } .wedding h2 { font-size: 29px; white-space: nowrap; } .wedding .wrow { gap: 10px; } .wedding .num { font-size: 46px; } .wedding .wd { gap: 6px; } .wedding .wdm, .wedding .wi span { font-size: 9px; letter-spacing: .14em; } .wedding .wi b { font-size: 22px; } }
 @media (min-width: 860px) {
-  .cards { max-width: 700px; }
-  .cards::before { left: 33px; top: 24px; bottom: 36px; }
-  .tday { padding-left: 90px; gap: 16px; margin-top: 18px; }
-  .tdot { left: 28px; }
-  .tday .num { font-size: 58px; }
-  .tday .mon { font-size: 13px; }
-  .tev { padding: 18px 0 16px 90px; }
-  .tev .medal { width: 68px; height: 68px; top: 22px; }
-  .tev .time { font-size: 13px; }
-  .tev h2 { font-size: 36px; }
-  .tev .tag { display: block; min-height: 0; margin: 6px 0 0; font-size: 17px; }
-  .tev .story { font-size: 16.5px; margin-top: 10px; }
-  .tev .vloc { margin-top: 16px; padding: 14px 16px; }
-  .tev .vname { font-size: 19px; }
-  .tev .vaddr { font-size: 15px; }
+  .wedding { max-width: 600px; padding: 42px 52px 42px; }
+  .wedding .cf { width: 78px; height: 78px; }
+  .wedding .cf.tl, .wedding .cf.tr { top: -14px; } .wedding .cf.bl, .wedding .cf.br { bottom: -14px; }
+  .wedding .cf.tl, .wedding .cf.bl { left: -14px; } .wedding .cf.tr, .wedding .cf.br { right: -14px; }
+  .wedding .flag { width: 66px; }
+  .wedding h2 { font-size: 46px; }
+  .wedding .wrow { gap: 26px; margin-top: 24px; }
+  .wedding .num { font-size: 74px; }
+  .wedding .wdm, .wedding .wi span, .wedding .vl, .wedding .dir { font-size: 11.5px; }
+  .wedding .wi b { font-size: 36px; }
+  .wedding .vn { margin-top: 24px; padding-top: 22px; max-width: 44ch; }
+  .wedding .vn h3 { font-size: 28px; }
+  .wedding .vn p { font-size: 16.5px; }
+  .wedding .story { margin-top: 18px; font-size: 16.5px; max-width: 44ch; }
+}
+
+/* Single-event card */
+.wedding.evt .wh { flex-direction: column; gap: 14px; }
+.wedding.evt .medal { width: 66px; height: 66px; }
+.wedding.evt h2 { white-space: normal; text-wrap: balance; }
+.wedding.evt .etag { margin: 8px 0 0; font-family: var(--font-display); font-size: 18px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
+.wedding.evt .story { max-width: 38ch; }
+@media (min-width: 860px) {
+  .wedding.evt .medal { width: 86px; height: 86px; }
+  .wedding.evt .etag { font-size: 21px; margin-top: 10px; }
+  .wedding.evt .story { max-width: 48ch; }
 }
 
 /* ---- In-page RSVP flow: full-screen, one question per step ---- */
@@ -344,6 +356,10 @@ html.rf-lock, html.rf-lock body { overflow: hidden; }
 .rf .btn.rf-next[disabled] { opacity: .4; cursor: default; pointer-events: none; }
 .rf-fine { margin: 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .rf-err { margin: 0; text-align: center; font-size: 14px; line-height: 1.5; color: #8C2F2F; }
+.rf-link[disabled] { opacity: .4; pointer-events: none; }
+.rf-ta { resize: none; min-height: 120px; line-height: 1.5; font-size: 18px; }
+.rf-sum dd.sm { font-family: var(--font-body); font-weight: 300; font-size: 15px; line-height: 1.5; max-height: 9em; overflow-y: auto; }
+.rsvp .lede.by { margin-top: -6px; color: var(--gold); font-weight: 500; }
 .rf-link { align-self: center; padding: 8px 4px; border: 0; background: none; color: var(--gold); font: 500 12px/1.4 var(--font-body); letter-spacing: .22em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--gold-line); cursor: pointer; }
 @keyframes rffade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes rfin { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -410,7 +426,7 @@ html.rf-lock, html.rf-lock body { overflow: hidden; }
         <h1>Karthikeya Sai</h1>
       </div>
       <div class="meta">
-        <p class="date-line rise" style="--d:.5s"><span class="caps">20 &middot; 21 November 2026</span></p>
+        <p class="date-line rise" style="--d:.5s"><span class="caps">21 November 2026</span></p>
         <p class="count rise" id="count" style="--d:.65s" hidden></p>
       </div>
     </header>
@@ -425,104 +441,61 @@ html.rf-lock, html.rf-lock body { overflow: hidden; }
   </div>
 
   <section class="events" aria-label="Celebrations">
-    <div class="interlude reveal">
-      <svg class="flora" viewBox="0 0 240 40" aria-hidden="true" fill="none">
-        <path d="M0 20H80M160 20H240" stroke="currentColor" stroke-width="1" opacity=".55"/>
-        <use href="#leaf" transform="translate(96 25) rotate(-72) scale(.5)"/><use href="#leaf" transform="translate(144 25) rotate(72) scale(.5)"/>
-        <use href="#jasmine" transform="translate(98 17) scale(.72)"/><use href="#jasmine" transform="translate(142 17) scale(.72)"/>
-        <use href="#marigold" transform="translate(120 20) scale(.8)"/>
+    <article class="wedding evt reveal">
+      <svg class="cf tl" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#leaf" transform="translate(26 28) rotate(84) scale(1.1)"/><use href="#leaf" transform="translate(26 28) rotate(118) scale(1.25)"/><use href="#leaf" transform="translate(26 28) rotate(152) scale(1.1)"/>
+        <use href="#marigold" transform="translate(66 14) rotate(20) scale(.62)"/><use href="#marigold" transform="translate(14 66) rotate(-10) scale(.62)"/>
+        <use href="#marigold" transform="translate(28 28) scale(1.15)"/>
+        <use href="#jasmine" transform="translate(54 40) scale(.9)"/><use href="#jasmine" transform="translate(40 54) scale(.9)"/>
+        <use href="#jasmine" transform="translate(88 22) scale(.7)"/><use href="#jasmine" transform="translate(22 88) scale(.7)"/>
       </svg>
-      <span class="caps">The celebrations</span>
-      <p>Two days, three celebrations and one very happy family.</p>
-    </div>
-
-    <div class="cards">
-      <div class="tday reveal"><i class="tdot"></i><span class="num">20</span><span class="mon">Friday &middot; November</span></div>
-      <article class="tev reveal">
-        <div class="medal" style="--tint:#E3EDD0; --bd:0s">
-          <svg viewBox="-30 -30 60 60" aria-hidden="true">
-            <line x1="0" y1="14" x2="0" y2="26" stroke="#4E7A3A" stroke-width="1.6"/>
-            <g transform="translate(0 14)"><use href="#leaf" transform="rotate(-46) scale(1.05)"/><use href="#leaf" transform="rotate(46) scale(1.05)"/><use href="#leaf" transform="scale(1.25)"/></g>
-            <circle cx="-15" cy="-14" r="1.7" fill="#8F6A24"/><circle cx="15" cy="-14" r="1.7" fill="#8F6A24"/><circle cx="0" cy="-23" r="1.7" fill="#8F6A24"/>
-          </svg>
-        </div>
-        <div class="body">
-          <p class="time">2:00 PM</p>
-          <h2>Mehendi</h2>
-          <p class="tag">Where it all begins.</p>
-          <p class="story">Come with a free afternoon and an open heart. Henna will bloom on hands and wrists, soft music will play, and the hours will move at the pace of good conversation. It is the gentlest way we know to begin a wedding.</p>
-          <div class="vloc">
-            <svg class="pin" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 21.5s6.5-5.6 6.5-11.2a6.5 6.5 0 1 0-13 0C5.5 15.9 12 21.5 12 21.5z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10.3" r="2.3" fill="currentColor"/></svg>
-            <div>
-              <p class="vname">Collierville Banquet Hall</p>
-              <p class="vaddr">360 New Byhalia Rd, Collierville, TN 38017</p>
-              <a class="vdir" href="https://www.google.com/maps/search/?api=1&amp;query=Collierville+Banquet+Hall%2C+360+New+Byhalia+Rd%2C+Collierville%2C+TN+38017" target="_blank" rel="noopener">Get directions &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="tev reveal">
-        <div class="medal" style="--tint:#EBE1F3; --bd:-1.2s">
-          <svg viewBox="-30 -30 60 60" aria-hidden="true">
-            <use href="#leaf" transform="translate(0 22) rotate(-58) scale(.8)"/><use href="#leaf" transform="translate(0 22) rotate(58) scale(.8)"/>
-            <use href="#jasmine" transform="translate(0 -4) scale(2.1)"/>
-            <use href="#jasmine" transform="translate(-16 14) scale(1.15)"/><use href="#jasmine" transform="translate(16 14) scale(1.15)"/>
-          </svg>
-        </div>
-        <div class="body">
-          <p class="time">7:00 PM</p>
-          <h2>Engagement &amp; Sangeet</h2>
-          <p class="tag">Once the henna is drying, the music begins.</p>
-          <p class="story">As the evening turns golden, we exchange rings and promises in front of the people we love most. Then the floor is yours. Expect songs, dances rehearsed in secret and plenty of joyful chaos from both families. Wear your brightest outfit and bring your best moves.</p>
-          <div class="vloc">
-            <svg class="pin" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 21.5s6.5-5.6 6.5-11.2a6.5 6.5 0 1 0-13 0C5.5 15.9 12 21.5 12 21.5z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10.3" r="2.3" fill="currentColor"/></svg>
-            <div>
-              <p class="vname">Collierville Banquet Hall</p>
-              <p class="vaddr">360 New Byhalia Rd, Collierville, TN 38017</p>
-              <a class="vdir" href="https://www.google.com/maps/search/?api=1&amp;query=Collierville+Banquet+Hall%2C+360+New+Byhalia+Rd%2C+Collierville%2C+TN+38017" target="_blank" rel="noopener">Get directions &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </article>
-      <div class="tday reveal"><i class="tdot"></i><span class="num">21</span><span class="mon">Saturday &middot; November</span></div>
-      <article class="tev reveal">
-        <div class="medal" style="--tint:#FCE7A6; --bd:-2.4s">
+      <svg class="cf tr" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#leaf" transform="translate(26 28) rotate(84) scale(1.1)"/><use href="#leaf" transform="translate(26 28) rotate(118) scale(1.25)"/><use href="#leaf" transform="translate(26 28) rotate(152) scale(1.1)"/>
+        <use href="#marigold" transform="translate(66 14) rotate(20) scale(.62)"/><use href="#marigold" transform="translate(14 66) rotate(-10) scale(.62)"/>
+        <use href="#marigold" transform="translate(28 28) scale(1.15)"/>
+        <use href="#jasmine" transform="translate(54 40) scale(.9)"/><use href="#jasmine" transform="translate(40 54) scale(.9)"/>
+        <use href="#jasmine" transform="translate(88 22) scale(.7)"/><use href="#jasmine" transform="translate(22 88) scale(.7)"/>
+      </svg>
+      <svg class="cf bl" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#leaf" transform="translate(26 28) rotate(84) scale(1.1)"/><use href="#leaf" transform="translate(26 28) rotate(118) scale(1.25)"/><use href="#leaf" transform="translate(26 28) rotate(152) scale(1.1)"/>
+        <use href="#marigold" transform="translate(66 14) rotate(20) scale(.62)"/><use href="#marigold" transform="translate(14 66) rotate(-10) scale(.62)"/>
+        <use href="#marigold" transform="translate(28 28) scale(1.15)"/>
+        <use href="#jasmine" transform="translate(54 40) scale(.9)"/><use href="#jasmine" transform="translate(40 54) scale(.9)"/>
+        <use href="#jasmine" transform="translate(88 22) scale(.7)"/><use href="#jasmine" transform="translate(22 88) scale(.7)"/>
+      </svg>
+      <svg class="cf br" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#leaf" transform="translate(26 28) rotate(84) scale(1.1)"/><use href="#leaf" transform="translate(26 28) rotate(118) scale(1.25)"/><use href="#leaf" transform="translate(26 28) rotate(152) scale(1.1)"/>
+        <use href="#marigold" transform="translate(66 14) rotate(20) scale(.62)"/><use href="#marigold" transform="translate(14 66) rotate(-10) scale(.62)"/>
+        <use href="#marigold" transform="translate(28 28) scale(1.15)"/>
+        <use href="#jasmine" transform="translate(54 40) scale(.9)"/><use href="#jasmine" transform="translate(40 54) scale(.9)"/>
+        <use href="#jasmine" transform="translate(88 22) scale(.7)"/><use href="#jasmine" transform="translate(22 88) scale(.7)"/>
+      </svg>
+      <div class="wh"><div class="medal" style="--tint:#FCE7A6; --bd:-2.4s">
           <svg viewBox="-30 -30 60 60" aria-hidden="true">
             <use href="#leaf" transform="translate(0 6) rotate(-118) scale(1.05)"/><use href="#leaf" transform="translate(0 6) rotate(118) scale(1.05)"/>
             <use href="#marigold" transform="translate(0 -1) scale(1.42)"/>
           </svg>
-        </div>
-        <div class="body">
-          <p class="time">12:00 PM</p>
-          <h2>Haldi</h2>
-          <p class="tag">Dance tonight, glow tomorrow.</p>
-          <p class="story">Turmeric is applied with love by family and friends, a blessing for good fortune and a glow for the days ahead. It is warm, bright and delightfully messy. Wear yellow or something you do not mind staining, and be ready to laugh a great deal.</p>
-          <div class="vloc">
-            <svg class="pin" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 21.5s6.5-5.6 6.5-11.2a6.5 6.5 0 1 0-13 0C5.5 15.9 12 21.5 12 21.5z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10.3" r="2.3" fill="currentColor"/></svg>
-            <div>
-              <p class="vname">India Cultural Center &amp; Temple Inc.</p>
-              <p class="vaddr">12005 US-64, Eads, TN 38028</p>
-              <a class="vdir" href="https://www.google.com/maps/search/?api=1&amp;query=India+Cultural+Center+%26+Temple+Inc.%2C+12005+US-64%2C+Eads%2C+TN+38028" target="_blank" rel="noopener">Get directions &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <div class="interlude reveal">
-      <svg class="flora" viewBox="0 0 240 40" aria-hidden="true" fill="none">
-        <path d="M0 20H80M160 20H240" stroke="currentColor" stroke-width="1" opacity=".55"/>
-        <use href="#leaf" transform="translate(96 25) rotate(-72) scale(.5)"/><use href="#leaf" transform="translate(144 25) rotate(72) scale(.5)"/>
-        <use href="#jasmine" transform="translate(98 17) scale(.72)"/><use href="#jasmine" transform="translate(142 17) scale(.72)"/>
-        <use href="#marigold" transform="translate(120 20) scale(.8)"/>
-      </svg>
-      <p>Your blessings and your company are what we look forward to most.</p>
-    </div>
+        </div><h2>Haldi</h2></div>
+      <p class="etag">Dance tonight, glow tomorrow.</p>
+      <div class="wrow">
+        <div class="wd"><span class="num">21</span><span class="wdm"><b>Saturday</b>Nov 2026</span></div>
+        <i class="wv"></i>
+        <p class="wi"><span>Time</span><b>12:00 PM</b></p>
+      </div>
+      <div class="vn">
+        <span class="vl">Venue</span>
+        <h3>India Cultural Center &amp; Temple Inc.</h3>
+        <p>12005 US-64, Eads, TN 38028</p>
+        <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=India+Cultural+Center+%26+Temple+Inc.%2C+12005+US-64%2C+Eads%2C+TN+38028" target="_blank" rel="noopener">Get directions &rarr;</a>
+      </div>
+      <p class="story">Turmeric is applied with love by family and friends, a blessing for good fortune and a glow for the days ahead. It is warm, bright and delightfully messy. Wear yellow or something you do not mind staining, and be ready to laugh a great deal.</p>
+    </article>
 
     <section class="rsvp reveal" id="rsvp" aria-labelledby="rsvp-h">
       <svg class="lotus" viewBox="-36 -34 72 44" aria-hidden="true"><use href="#lotus" transform="translate(0 7) scale(1.1)"/></svg>
       <h2 id="rsvp-h">Will you celebrate with us?</h2>
-      <p class="lede">Please let us know which celebrations you can join, so we can welcome you properly.</p>
+      <p class="lede">Please let us know if you can join us, so we can welcome you properly.</p>
+      <p class="lede by">If possible, kindly RSVP by 12 November.</p>
       <a class="btn" id="rsvp-btn" href="#" target="_blank" rel="noopener">RSVP</a>
       <span class="soon" id="soon" hidden>RSVP link coming soon.</span>
     </section>
@@ -631,11 +604,11 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
 
   /* Countdown to the first celebration */
   var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  var days = Math.round((new Date(2026, 10, 20) - today) / 864e5), c = document.getElementById("count"), msg = "";
+  var days = Math.round((new Date(2026, 10, 21) - today) / 864e5), c = document.getElementById("count"), msg = "";
   if (days > 1) msg = days + " days to go";
   else if (days === 1) msg = "Tomorrow";
-  else if (days === 0) msg = "The celebrations begin today";
-  else if (days >= -2) msg = "The celebrations are underway";
+  else if (days === 0) msg = "Haldi is today";
+  else if (days >= -2) msg = "Thank you for celebrating with us";
   if (msg) { c.textContent = msg; c.hidden = false; }
 
   /* Falling petals and the RSVP burst */
@@ -741,7 +714,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
 <script>
 /* In-page RSVP flow. Answers are collected here, then handed to the Tally form as a prefilled link. */
 (function () {
-  var CFG = {"kind": "events", "sorry": "Thank you for letting us know, {name}. We will miss you at the celebrations, and we are grateful for your love and blessings from wherever you are.", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "events", "type": "multi", "q": "Which celebrations will you join?", "hint": "Choose all that apply.", "options": [{"v": "Mehendi", "t": "Mehendi", "s": "Fri 20 Nov \u00b7 2:00 PM"}, {"v": "Engagement & Sangeet", "t": "Engagement & Sangeet", "s": "Fri 20 Nov \u00b7 7:00 PM"}, {"v": "Haldi", "t": "Haldi", "s": "Sat 21 Nov \u00b7 12:00 PM"}], "none": "Sadly, I can\u2019t make it"}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}], "mode": "endpoint"};
+  var CFG = {"kind": "haldi", "recordDecline": true, "sorry": "Thank you for letting us know, {name}. We will miss you at the Haldi, and we are grateful for your love and blessings from wherever you are.", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "phone", "type": "phone", "q": "What is your phone number?", "hint": "So we can reach you with any updates.", "label": "Phone number"}, {"id": "attending", "type": "single", "setsDeclined": true, "q": "Will you join us for the Haldi?", "hint": "Saturday 21 November, with your blessings.", "options": [{"v": "Yes", "t": "Joyfully accepts", "s": "12:00 PM"}, {"v": "No", "t": "Regretfully declines", "declines": true}]}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}, {"id": "message", "type": "note", "q": "Would you like to leave a message?", "hint": "A blessing, a note or anything we should know. This is optional.", "label": "Your message (optional)"}], "mode": "endpoint"};
   var ENDPOINT_MODE = CFG.mode === "endpoint";   // true: answers are posted to the sheet. false: hand off to the Tally form
   var root = document.getElementById("rf");
   if (!root) return;
@@ -749,9 +722,10 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   var backBtn = document.getElementById("rf-back"), closeBtn = document.getElementById("rf-x");
   var NS = "http://www.w3.org/2000/svg";
   var coarse = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-  var a, idx, finished, stopped, opener, cur;
+  var a, idx, finished, stopped, opener, cur, declineSaved, declineState, declineUI;
+  var RECORD_DECLINE = ENDPOINT_MODE && !!CFG.recordDecline;   // wedding page: save declines to the sheet
 
-  function fresh() { a = { name: "", side: "", events: [], attending: "", guests: 1, declined: false }; idx = 0; finished = false; stopped = false; }
+  function fresh() { a = { name: "", phone: "", side: "", events: [], attending: "", guests: 1, declined: false, message: "" }; idx = 0; finished = false; stopped = false; declineSaved = false; declineState = "idle"; declineUI = null; }
   fresh();
 
   function el(tag, cls, text) {
@@ -768,6 +742,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   }
   function valid(s) {
     if (s.type === "text") return a.name.trim().length > 1;
+    if (s.type === "phone") { var n = a.phone.replace(/\D/g, "").length; return n >= 7 && n <= 15; }
     if (s.type === "multi") return a.events.length > 0 || a.declined;
     if (s.type === "single") return !!a[s.id];
     return true;
@@ -776,10 +751,12 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     var u = window.RSVP_URL, p = [];
     function add(k, v) { p.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); }
     add("name", a.name.trim());
+    if (a.phone.trim()) add("phone", a.phone.trim());
     add("side", a.side);
     if (CFG.kind === "events") { if (a.events.length) add("events", a.events.join(",")); }
     else add("attending", a.attending);
     add("guests", a.declined ? 0 : a.guests);
+    if (a.message.trim()) add("message", a.message.trim());
     return u + (u.indexOf("?") < 0 ? "?" : "&") + p.join("&");
   }
   function tick() {
@@ -806,6 +783,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   function refresh() {
     if (!cur) return;
     if (cur.nextBtn) cur.nextBtn.disabled = !valid(cur.s);
+    if (cur.nextBtn && cur.s.type === "note") cur.nextBtn.textContent = a.message.trim() ? "Continue" : "Skip";
     cur.opts.forEach(function (x) {
       var on = cur.s.type === "multi"
         ? (x.o.declines ? a.declined : a.events.indexOf(x.o.v) >= 0)
@@ -828,25 +806,47 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (idx > 0) { idx--; render(); }
   }
 
-  /* Posts the answers to the Google Sheet endpoint. The invite only says "submitted" once the sheet confirms it. */
+  /* Posts one response to the Google Sheet endpoint. It resolves only when the sheet confirms it saved the row. */
+  function postJson(data) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    return fetch(window.RSVP_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data), signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { clearTimeout(timer); if (!j || j.ok !== true) throw new Error("rejected"); },
+            function (e) { clearTimeout(timer); throw e; });
+  }
+  function payload(declined) {
+    return {
+      page: CFG.kind, name: a.name.trim(), phone: a.phone.trim(), side: declined ? "" : a.side, declined: declined,
+      events: declined ? "" : a.events.join(", "), attending: declined ? "No" : "Yes", guests: declined ? 0 : a.guests,
+      message: declined ? "" : a.message.trim()
+    };
+  }
+  /* The invite only says "submitted" once the sheet confirms it. */
   var sending = false;
   function submit(btn, err, label) {
     if (sending) return;
     sending = true; err.hidden = true; btn.disabled = true; btn.textContent = "Sending";
-    var body = JSON.stringify({
-      page: CFG.kind, name: a.name.trim(), side: a.side, declined: a.declined,
-      events: a.events.join(", "), attending: a.declined ? "No" : "Yes", guests: a.declined ? 0 : a.guests
-    });
-    var ctl = window.AbortController ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
-    function fail() { sending = false; clearTimeout(timer); btn.disabled = false; btn.textContent = label; err.hidden = false; }
-    fetch(window.RSVP_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, signal: ctl ? ctl.signal : undefined })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (!j || j.ok !== true) throw new Error("rejected");
-        sending = false; clearTimeout(timer); finished = true; render();
-      })
-      .catch(fail);
+    postJson(payload(a.declined)).then(
+      function () { sending = false; finished = true; render(); },
+      function () { sending = false; btn.disabled = false; btn.textContent = label; err.hidden = false; });
+  }
+  /* Wedding page: a guest who can't come is saved to the sheet as Declined, then the flow ends with a thank you. */
+  function paintDecline() {
+    if (!declineUI) return;
+    var u = declineUI, st = declineState;
+    u.st.textContent = st === "sending" ? "Saving your response" : st === "sent" ? "Your response has been noted."
+      : st === "error" ? "We couldn\u2019t save your response. Please check your connection and try again." : "";
+    u.retry.hidden = st !== "error";
+    u.close.disabled = st === "sending";
+    u.undo.disabled = st === "sending";
+  }
+  function sendDecline() {
+    if (declineSaved) { declineState = "sent"; paintDecline(); return; }
+    declineState = "sending"; paintDecline();
+    postJson(payload(true)).then(
+      function () { declineSaved = true; declineState = "sent"; paintDecline(); },
+      function () { declineState = "error"; paintDecline(); });
   }
 
   function render() {
@@ -854,10 +854,11 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (idx > f.length - 1) idx = f.length - 1;
     var s = f[idx], box = el("div", "rf-step"), focusEl = null;
     cur = { s: s, opts: [], nextBtn: null, numEl: null };
+    declineUI = null;
     stage.textContent = "";
 
     if (stopped) {
-      /* A guest who can't come ends the flow here. Nothing is sent to the sheet. */
+      /* A guest who can't come ends the flow here. On the wedding page the decline is saved to the sheet first. */
       box.className += " rf-center";
       box.appendChild(lotus());
       var first0 = a.name.trim().split(/\s+/)[0];
@@ -867,6 +868,14 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       var undo = el("button", "rf-link", "Changed your mind? Go back"); undo.type = "button";
       undo.addEventListener("click", function () { stopped = false; a.declined = false; a.events = []; a.attending = ""; render(); });
       box.appendChild(undo);
+      if (RECORD_DECLINE) {
+        var dst = el("p", "rf-fine", ""); dst.setAttribute("role", "status");
+        var dretry = el("button", "rf-link", "Try again"); dretry.type = "button"; dretry.hidden = true;
+        dretry.addEventListener("click", sendDecline);
+        box.insertBefore(dst, okc); box.insertBefore(dretry, okc);
+        declineUI = { st: dst, retry: dretry, close: okc, undo: undo };
+        paintDecline();
+      }
       cur = null;
     } else if (finished) {
       box.className += " rf-center";
@@ -892,12 +901,14 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       box.appendChild(lotus());
       focusEl = heading(box, "Everything look right?", ENDPOINT_MODE ? "A last look before you send your response." : "A last look before we take you to our RSVP form.");
       var dl = el("dl", "rf-sum");
-      function row(k, v) { var d = el("div"); d.appendChild(el("dt", null, k)); d.appendChild(el("dd", null, v)); dl.appendChild(d); }
+      function row(k, v, small) { var d = el("div"); d.appendChild(el("dt", null, k)); d.appendChild(el("dd", small ? "sm" : null, v)); dl.appendChild(d); }
       row("Name", a.name.trim());
+      if (a.phone.trim()) row("Phone", a.phone.trim());
       row("Team", a.side);
       if (CFG.kind === "events") row("Celebrations", a.declined ? "Can’t make it" : a.events.join(", "));
       else row("Attending", a.declined ? "Regretfully declines" : "Joyfully accepts");
       if (!a.declined) row("Guests", String(a.guests));
+      if (a.message.trim()) row("Message", a.message.trim(), true);
       box.appendChild(dl);
       var label = a.declined ? "Send my reply" : "Send my RSVP";
       if (ENDPOINT_MODE) {
@@ -917,14 +928,26 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       }
     } else {
       focusEl = heading(box, s.q, s.hint);
-      if (s.type === "text") {
+      if (s.type === "text" || s.type === "phone") {
+        var isPhone = s.type === "phone";
         var inp = el("input", "rf-in");
-        inp.type = "text"; inp.maxLength = 80; inp.value = a.name; inp.placeholder = s.label;
-        inp.setAttribute("aria-label", s.label); inp.setAttribute("autocomplete", "name"); inp.setAttribute("enterkeyhint", "next");
-        inp.addEventListener("input", function () { a.name = inp.value; refresh(); });
+        inp.type = isPhone ? "tel" : "text"; inp.maxLength = isPhone ? 20 : 80; inp.value = isPhone ? a.phone : a.name; inp.placeholder = s.label;
+        inp.setAttribute("aria-label", s.label); inp.setAttribute("autocomplete", isPhone ? "tel" : "name"); inp.setAttribute("enterkeyhint", "next");
+        if (isPhone) inp.setAttribute("inputmode", "tel");
+        inp.addEventListener("input", function () {
+          if (isPhone) { var c = inp.value.replace(/[^\d+()\-.\s]/g, ""); if (c !== inp.value) inp.value = c; a.phone = c; }
+          else a.name = inp.value;
+          declineSaved = false; refresh();
+        });
         inp.addEventListener("keydown", function (e) { if (e.key === "Enter" && valid(s)) { e.preventDefault(); next(); } });
         box.appendChild(inp);
         if (!coarse) focusEl = inp;
+      } else if (s.type === "note") {
+        var ta = el("textarea", "rf-in rf-ta"); ta.rows = 4; ta.maxLength = 300; ta.value = a.message; ta.placeholder = s.label;
+        ta.setAttribute("aria-label", s.label);
+        ta.addEventListener("input", function () { a.message = ta.value; refresh(); });
+        box.appendChild(ta);
+        if (!coarse) focusEl = ta;
       } else if (s.type === "multi" || s.type === "single") {
         var list = el("div", "rf-opts");
         var all = s.options.slice();
@@ -945,7 +968,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
               }
             } else { a[s.id] = o.v; if (s.setsDeclined) a.declined = !!o.declines; }
             refresh();
-            if (o.declines && a.declined) setTimeout(function () { if (a.declined && !stopped && !finished) { stopped = true; render(); } }, 300);
+            if (o.declines && a.declined) setTimeout(function () { if (a.declined && !stopped && !finished) { stopped = true; render(); if (RECORD_DECLINE) sendDecline(); } }, 300);
           });
           list.appendChild(b);
           cur.opts.push({ btn: b, o: o });
@@ -995,7 +1018,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (root.hidden) return;
     if (e.key === "Escape") { close(); return; }
     if (e.key !== "Tab") return;
-    var f = [].slice.call(root.querySelectorAll("button:not([disabled]), a[href], input")).filter(function (n) { return n.offsetParent !== null && getComputedStyle(n).visibility !== "hidden"; });
+    var f = [].slice.call(root.querySelectorAll("button:not([disabled]), a[href], input, textarea")).filter(function (n) { return n.offsetParent !== null && getComputedStyle(n).visibility !== "hidden"; });
     if (!f.length) return;
     var first = f[0], last = f[f.length - 1];
     if (e.shiftKey && (document.activeElement === first || !root.contains(document.activeElement))) { e.preventDefault(); last.focus(); }

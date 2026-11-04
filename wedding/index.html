@@ -344,6 +344,10 @@ html.rf-lock, html.rf-lock body { overflow: hidden; }
 .rf .btn.rf-next[disabled] { opacity: .4; cursor: default; pointer-events: none; }
 .rf-fine { margin: 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .rf-err { margin: 0; text-align: center; font-size: 14px; line-height: 1.5; color: #8C2F2F; }
+.rf-link[disabled] { opacity: .4; pointer-events: none; }
+.rf-ta { resize: none; min-height: 120px; line-height: 1.5; font-size: 18px; }
+.rf-sum dd.sm { font-family: var(--font-body); font-weight: 300; font-size: 15px; line-height: 1.5; max-height: 9em; overflow-y: auto; }
+.rsvp .lede.by { margin-top: -6px; color: var(--gold); font-weight: 500; }
 .rf-link { align-self: center; padding: 8px 4px; border: 0; background: none; color: var(--gold); font: 500 12px/1.4 var(--font-body); letter-spacing: .22em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--gold-line); cursor: pointer; }
 @keyframes rffade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes rfin { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -474,6 +478,7 @@ html.rf-lock, html.rf-lock body { overflow: hidden; }
       <svg class="lotus" viewBox="-36 -34 72 44" aria-hidden="true"><use href="#lotus" transform="translate(0 7) scale(1.1)"/></svg>
       <h2 id="rsvp-h">Will you celebrate with us?</h2>
       <p class="lede">Please let us know if you can join us, so we can welcome you properly.</p>
+      <p class="lede by">If possible, kindly RSVP by 12 November.</p>
       <a class="btn" id="rsvp-btn" href="#" target="_blank" rel="noopener">RSVP</a>
       <span class="soon" id="soon" hidden>RSVP link coming soon.</span>
     </section>
@@ -692,7 +697,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
 <script>
 /* In-page RSVP flow. Answers are collected here, then handed to the Tally form as a prefilled link. */
 (function () {
-  var CFG = {"kind": "wedding", "sorry": "Thank you for letting us know, {name}. We will miss you on our special day, and we are grateful for your love and blessings from wherever you are.", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "attending", "type": "single", "setsDeclined": true, "q": "Will you join us for the wedding?", "hint": "Sunday 22 November, with your blessings.", "options": [{"v": "Yes", "t": "Joyfully accepts", "s": "Shubha Muhurtham \u00b7 10:20 AM"}, {"v": "No", "t": "Regretfully declines", "declines": true}]}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}], "mode": "endpoint"};
+  var CFG = {"kind": "wedding", "recordDecline": true, "sorry": "Thank you for letting us know, {name}. We will miss you on our special day, and we are grateful for your love and blessings from wherever you are.", "steps": [{"id": "name", "type": "text", "q": "May we have your name?", "hint": "So we can welcome you properly.", "label": "Full name"}, {"id": "phone", "type": "phone", "q": "What is your phone number?", "hint": "So we can reach you with any updates.", "label": "Phone number"}, {"id": "attending", "type": "single", "setsDeclined": true, "q": "Will you join us for the wedding?", "hint": "Sunday 22 November, with your blessings.", "options": [{"v": "Yes", "t": "Joyfully accepts", "s": "Shubha Muhurtham \u00b7 10:20 AM"}, {"v": "No", "t": "Regretfully declines", "declines": true}]}, {"id": "guests", "type": "count", "q": "How many will be joining?", "hint": "Please count everyone in your party, including you.", "min": 1, "max": 10, "skipIfDeclined": true}, {"id": "side", "type": "single", "q": "Which side are you joining from?", "hint": "Are you cheering for the bride or the groom?", "options": [{"v": "Team Bride", "t": "Team Bride", "s": "Laharika\u2019s side"}, {"v": "Team Groom", "t": "Team Groom", "s": "Karthikeya Sai\u2019s side"}]}, {"id": "message", "type": "note", "q": "Would you like to leave a message?", "hint": "A blessing, a note or anything we should know. This is optional.", "label": "Your message (optional)"}], "mode": "endpoint"};
   var ENDPOINT_MODE = CFG.mode === "endpoint";   // true: answers are posted to the sheet. false: hand off to the Tally form
   var root = document.getElementById("rf");
   if (!root) return;
@@ -700,9 +705,10 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   var backBtn = document.getElementById("rf-back"), closeBtn = document.getElementById("rf-x");
   var NS = "http://www.w3.org/2000/svg";
   var coarse = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-  var a, idx, finished, stopped, opener, cur;
+  var a, idx, finished, stopped, opener, cur, declineSaved, declineState, declineUI;
+  var RECORD_DECLINE = ENDPOINT_MODE && !!CFG.recordDecline;   // wedding page: save declines to the sheet
 
-  function fresh() { a = { name: "", side: "", events: [], attending: "", guests: 1, declined: false }; idx = 0; finished = false; stopped = false; }
+  function fresh() { a = { name: "", phone: "", side: "", events: [], attending: "", guests: 1, declined: false, message: "" }; idx = 0; finished = false; stopped = false; declineSaved = false; declineState = "idle"; declineUI = null; }
   fresh();
 
   function el(tag, cls, text) {
@@ -719,6 +725,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   }
   function valid(s) {
     if (s.type === "text") return a.name.trim().length > 1;
+    if (s.type === "phone") { var n = a.phone.replace(/\D/g, "").length; return n >= 7 && n <= 15; }
     if (s.type === "multi") return a.events.length > 0 || a.declined;
     if (s.type === "single") return !!a[s.id];
     return true;
@@ -727,10 +734,12 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     var u = window.RSVP_URL, p = [];
     function add(k, v) { p.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); }
     add("name", a.name.trim());
+    if (a.phone.trim()) add("phone", a.phone.trim());
     add("side", a.side);
     if (CFG.kind === "events") { if (a.events.length) add("events", a.events.join(",")); }
     else add("attending", a.attending);
     add("guests", a.declined ? 0 : a.guests);
+    if (a.message.trim()) add("message", a.message.trim());
     return u + (u.indexOf("?") < 0 ? "?" : "&") + p.join("&");
   }
   function tick() {
@@ -757,6 +766,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
   function refresh() {
     if (!cur) return;
     if (cur.nextBtn) cur.nextBtn.disabled = !valid(cur.s);
+    if (cur.nextBtn && cur.s.type === "note") cur.nextBtn.textContent = a.message.trim() ? "Continue" : "Skip";
     cur.opts.forEach(function (x) {
       var on = cur.s.type === "multi"
         ? (x.o.declines ? a.declined : a.events.indexOf(x.o.v) >= 0)
@@ -779,25 +789,47 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (idx > 0) { idx--; render(); }
   }
 
-  /* Posts the answers to the Google Sheet endpoint. The invite only says "submitted" once the sheet confirms it. */
+  /* Posts one response to the Google Sheet endpoint. It resolves only when the sheet confirms it saved the row. */
+  function postJson(data) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    return fetch(window.RSVP_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data), signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { clearTimeout(timer); if (!j || j.ok !== true) throw new Error("rejected"); },
+            function (e) { clearTimeout(timer); throw e; });
+  }
+  function payload(declined) {
+    return {
+      page: CFG.kind, name: a.name.trim(), phone: a.phone.trim(), side: declined ? "" : a.side, declined: declined,
+      events: declined ? "" : a.events.join(", "), attending: declined ? "No" : "Yes", guests: declined ? 0 : a.guests,
+      message: declined ? "" : a.message.trim()
+    };
+  }
+  /* The invite only says "submitted" once the sheet confirms it. */
   var sending = false;
   function submit(btn, err, label) {
     if (sending) return;
     sending = true; err.hidden = true; btn.disabled = true; btn.textContent = "Sending";
-    var body = JSON.stringify({
-      page: CFG.kind, name: a.name.trim(), side: a.side, declined: a.declined,
-      events: a.events.join(", "), attending: a.declined ? "No" : "Yes", guests: a.declined ? 0 : a.guests
-    });
-    var ctl = window.AbortController ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
-    function fail() { sending = false; clearTimeout(timer); btn.disabled = false; btn.textContent = label; err.hidden = false; }
-    fetch(window.RSVP_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, signal: ctl ? ctl.signal : undefined })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (!j || j.ok !== true) throw new Error("rejected");
-        sending = false; clearTimeout(timer); finished = true; render();
-      })
-      .catch(fail);
+    postJson(payload(a.declined)).then(
+      function () { sending = false; finished = true; render(); },
+      function () { sending = false; btn.disabled = false; btn.textContent = label; err.hidden = false; });
+  }
+  /* Wedding page: a guest who can't come is saved to the sheet as Declined, then the flow ends with a thank you. */
+  function paintDecline() {
+    if (!declineUI) return;
+    var u = declineUI, st = declineState;
+    u.st.textContent = st === "sending" ? "Saving your response" : st === "sent" ? "Your response has been noted."
+      : st === "error" ? "We couldn\u2019t save your response. Please check your connection and try again." : "";
+    u.retry.hidden = st !== "error";
+    u.close.disabled = st === "sending";
+    u.undo.disabled = st === "sending";
+  }
+  function sendDecline() {
+    if (declineSaved) { declineState = "sent"; paintDecline(); return; }
+    declineState = "sending"; paintDecline();
+    postJson(payload(true)).then(
+      function () { declineSaved = true; declineState = "sent"; paintDecline(); },
+      function () { declineState = "error"; paintDecline(); });
   }
 
   function render() {
@@ -805,10 +837,11 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (idx > f.length - 1) idx = f.length - 1;
     var s = f[idx], box = el("div", "rf-step"), focusEl = null;
     cur = { s: s, opts: [], nextBtn: null, numEl: null };
+    declineUI = null;
     stage.textContent = "";
 
     if (stopped) {
-      /* A guest who can't come ends the flow here. Nothing is sent to the sheet. */
+      /* A guest who can't come ends the flow here. On the wedding page the decline is saved to the sheet first. */
       box.className += " rf-center";
       box.appendChild(lotus());
       var first0 = a.name.trim().split(/\s+/)[0];
@@ -818,6 +851,14 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       var undo = el("button", "rf-link", "Changed your mind? Go back"); undo.type = "button";
       undo.addEventListener("click", function () { stopped = false; a.declined = false; a.events = []; a.attending = ""; render(); });
       box.appendChild(undo);
+      if (RECORD_DECLINE) {
+        var dst = el("p", "rf-fine", ""); dst.setAttribute("role", "status");
+        var dretry = el("button", "rf-link", "Try again"); dretry.type = "button"; dretry.hidden = true;
+        dretry.addEventListener("click", sendDecline);
+        box.insertBefore(dst, okc); box.insertBefore(dretry, okc);
+        declineUI = { st: dst, retry: dretry, close: okc, undo: undo };
+        paintDecline();
+      }
       cur = null;
     } else if (finished) {
       box.className += " rf-center";
@@ -843,12 +884,14 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       box.appendChild(lotus());
       focusEl = heading(box, "Everything look right?", ENDPOINT_MODE ? "A last look before you send your response." : "A last look before we take you to our RSVP form.");
       var dl = el("dl", "rf-sum");
-      function row(k, v) { var d = el("div"); d.appendChild(el("dt", null, k)); d.appendChild(el("dd", null, v)); dl.appendChild(d); }
+      function row(k, v, small) { var d = el("div"); d.appendChild(el("dt", null, k)); d.appendChild(el("dd", small ? "sm" : null, v)); dl.appendChild(d); }
       row("Name", a.name.trim());
+      if (a.phone.trim()) row("Phone", a.phone.trim());
       row("Team", a.side);
       if (CFG.kind === "events") row("Celebrations", a.declined ? "Can’t make it" : a.events.join(", "));
       else row("Attending", a.declined ? "Regretfully declines" : "Joyfully accepts");
       if (!a.declined) row("Guests", String(a.guests));
+      if (a.message.trim()) row("Message", a.message.trim(), true);
       box.appendChild(dl);
       var label = a.declined ? "Send my reply" : "Send my RSVP";
       if (ENDPOINT_MODE) {
@@ -868,14 +911,26 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
       }
     } else {
       focusEl = heading(box, s.q, s.hint);
-      if (s.type === "text") {
+      if (s.type === "text" || s.type === "phone") {
+        var isPhone = s.type === "phone";
         var inp = el("input", "rf-in");
-        inp.type = "text"; inp.maxLength = 80; inp.value = a.name; inp.placeholder = s.label;
-        inp.setAttribute("aria-label", s.label); inp.setAttribute("autocomplete", "name"); inp.setAttribute("enterkeyhint", "next");
-        inp.addEventListener("input", function () { a.name = inp.value; refresh(); });
+        inp.type = isPhone ? "tel" : "text"; inp.maxLength = isPhone ? 20 : 80; inp.value = isPhone ? a.phone : a.name; inp.placeholder = s.label;
+        inp.setAttribute("aria-label", s.label); inp.setAttribute("autocomplete", isPhone ? "tel" : "name"); inp.setAttribute("enterkeyhint", "next");
+        if (isPhone) inp.setAttribute("inputmode", "tel");
+        inp.addEventListener("input", function () {
+          if (isPhone) { var c = inp.value.replace(/[^\d+()\-.\s]/g, ""); if (c !== inp.value) inp.value = c; a.phone = c; }
+          else a.name = inp.value;
+          declineSaved = false; refresh();
+        });
         inp.addEventListener("keydown", function (e) { if (e.key === "Enter" && valid(s)) { e.preventDefault(); next(); } });
         box.appendChild(inp);
         if (!coarse) focusEl = inp;
+      } else if (s.type === "note") {
+        var ta = el("textarea", "rf-in rf-ta"); ta.rows = 4; ta.maxLength = 300; ta.value = a.message; ta.placeholder = s.label;
+        ta.setAttribute("aria-label", s.label);
+        ta.addEventListener("input", function () { a.message = ta.value; refresh(); });
+        box.appendChild(ta);
+        if (!coarse) focusEl = ta;
       } else if (s.type === "multi" || s.type === "single") {
         var list = el("div", "rf-opts");
         var all = s.options.slice();
@@ -896,7 +951,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
               }
             } else { a[s.id] = o.v; if (s.setsDeclined) a.declined = !!o.declines; }
             refresh();
-            if (o.declines && a.declined) setTimeout(function () { if (a.declined && !stopped && !finished) { stopped = true; render(); } }, 300);
+            if (o.declines && a.declined) setTimeout(function () { if (a.declined && !stopped && !finished) { stopped = true; render(); if (RECORD_DECLINE) sendDecline(); } }, 300);
           });
           list.appendChild(b);
           cur.opts.push({ btn: b, o: o });
@@ -946,7 +1001,7 @@ var RSVP_URL = window.RSVP_ENDPOINT || "";
     if (root.hidden) return;
     if (e.key === "Escape") { close(); return; }
     if (e.key !== "Tab") return;
-    var f = [].slice.call(root.querySelectorAll("button:not([disabled]), a[href], input")).filter(function (n) { return n.offsetParent !== null && getComputedStyle(n).visibility !== "hidden"; });
+    var f = [].slice.call(root.querySelectorAll("button:not([disabled]), a[href], input, textarea")).filter(function (n) { return n.offsetParent !== null && getComputedStyle(n).visibility !== "hidden"; });
     if (!f.length) return;
     var first = f[0], last = f[f.length - 1];
     if (e.shiftKey && (document.activeElement === first || !root.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
